@@ -24,4 +24,4 @@ position = Vector2( 176, 72 )
 dexterity = 5
 
 [node name="TraceAIController" parent="Knight2" instance=ExtResource( 5 )]
-target_class = [ "Knight" ]
+target_nodes = [ NodePath("../../Knight") ]

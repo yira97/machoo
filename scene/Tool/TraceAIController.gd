@@ -4,8 +4,8 @@ var puppet = null
 var target = null
 var move_direcstion:Vector2 = Vector2(0,0)
 
-export (Array,String) var target_class = null
 export (bool) var random_walk = false
+export (Array,NodePath) var target_nodes = null
 
 func _enter_tree():
 	puppet = get_parent()
@@ -22,14 +22,13 @@ func _physics_process(delta):
 
 
 func _on_Area2D_area_entered(area):
-	var body = area.get_parent()
 	if target == null:
-		for name in target_class:
-			if name == body.get_name():
-				target = body
+		if target_nodes != null:
+			for n in target_nodes:
+				if get_node(n).is_a_parent_of(area):
+					target = area
 
 
 func _on_Area2D_area_exited(area):
-	var body = area.get_parent()
-	if target == body:
+	if target == area:
 		target = null;
