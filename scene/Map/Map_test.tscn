@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scene/Map/Map_test.gd" type="Script" id=1]
+[ext_resource path="res://tileset/floor_wall.tres" type="TileSet" id=2]
+[ext_resource path="res://scene/Character/Knight.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scene/Tool/UserController.tscn" type="PackedScene" id=4]
+
+[node name="Map_test" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 16, 16 )
+format = 1
+
+[node name="Knight" parent="." instance=ExtResource( 3 )]
+
+[node name="UserController" parent="Knight" instance=ExtResource( 4 )]
