@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scene/Map/Map_test.gd" type="Script" id=1]
 [ext_resource path="res://tileset/floor_wall.tres" type="TileSet" id=2]
 [ext_resource path="res://scene/Character/Knight.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scene/Tool/UserController.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scene/Tool/TraceAIController.tscn" type="PackedScene" id=5]
 
 [node name="Map_test" type="Node2D"]
 script = ExtResource( 1 )
@@ -14,5 +15,13 @@ cell_size = Vector2( 16, 16 )
 format = 1
 
 [node name="Knight" parent="." instance=ExtResource( 3 )]
+position = Vector2( 29, 66 )
 
 [node name="UserController" parent="Knight" instance=ExtResource( 4 )]
+
+[node name="Knight2" parent="." instance=ExtResource( 3 )]
+position = Vector2( 176, 72 )
+dexterity = 5
+
+[node name="TraceAIController" parent="Knight2" instance=ExtResource( 5 )]
+target_class = [ "Knight" ]

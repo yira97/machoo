@@ -29,6 +29,8 @@ func move(delta):
 		$Area2D/AnimatedSprite.animation = "run"
 	position += move
 	
+func clear_status():
+	move_step = Vector2(0,0)
 	
 func move_to(direction:Vector2):
 	move_step = direction
@@ -36,3 +38,4 @@ func move_to(direction:Vector2):
 	
 func _physics_process(delta):
 	move(delta)
+	clear_status()
