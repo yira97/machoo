@@ -14,10 +14,13 @@ animation = "idle"
 [node name="CollisionRange" type="CollisionShape2D" parent="."]
 position = Vector2( 0.824493, 2.00234 )
 
-[node name="InteractRange" type="CollisionShape2D" parent="."]
-disabled = true
+[node name="InteractArea" type="Area2D" parent="."]
+
+[node name="InteractRange" type="CollisionShape2D" parent="InteractArea"]
 
 [node name="MainHandPosition" type="Position2D" parent="."]
+
+[node name="CoolDownTimer" type="Timer" parent="MainHandPosition"]
 
 [node name="EquipSprite" type="AnimatedSprite" parent="MainHandPosition"]
 
@@ -26,6 +29,7 @@ disabled = true
 [node name="EquipRange" type="CollisionShape2D" parent="MainHandPosition/EquipArea"]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[connection signal="timeout" from="MainHandPosition/CoolDownTimer" to="." method="_on_CoolDownTimer_timeout"]
 [connection signal="body_entered" from="MainHandPosition/EquipArea" to="." method="_on_EquipArea_body_entered"]
 [connection signal="body_exited" from="MainHandPosition/EquipArea" to="." method="_on_EquipArea_body_exited"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

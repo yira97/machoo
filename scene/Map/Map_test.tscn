@@ -21,6 +21,9 @@ position = Vector2( 55, 69 )
 
 [node name="UserController" parent="Knight" instance=ExtResource( 4 )]
 
+[node name="Camera2D" type="Camera2D" parent="Knight"]
+current = true
+
 [node name="Masked_Ork" parent="." instance=ExtResource( 5 )]
 position = Vector2( 193, 125 )
 

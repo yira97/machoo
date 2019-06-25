@@ -30,11 +30,11 @@ func _on_Area2D_body_entered(body):
 		if target_nodes != null:
 			for n in target_nodes:
 				if get_node(n).is_a_parent_of(body) || get_node(n) == body:
-					print("catch you")
+					#print("catch you")
 					target = body
 
 
 func _on_Area2D_body_exited(body):
 	if target == body:
-		print("lost you")
+		#print("lost you")
 		target = null;
