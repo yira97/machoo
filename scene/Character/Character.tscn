@@ -1,24 +1,31 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=2 format=2]
 
 [ext_resource path="res://scene/Character/Character.gd" type="Script" id=1]
 
-[sub_resource type="SpriteFrames" id=1]
-animations = [ {
-"frames": [  ],
-"loop": true,
-"name": "default",
-"speed": 5.0
-} ]
-
-[sub_resource type="RectangleShape2D" id=2]
-
-[node name="Character" type="Node2D"]
+[node name="Character" type="KinematicBody2D"]
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+animation = "idle"
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="Area2D"]
-frames = SubResource( 1 )
+[node name="CollisionRange" type="CollisionShape2D" parent="."]
+position = Vector2( 0.824493, 2.00234 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 2 )
+[node name="InteractRange" type="CollisionShape2D" parent="."]
+disabled = true
+
+[node name="MainHandPosition" type="Position2D" parent="."]
+
+[node name="EquipSprite" type="AnimatedSprite" parent="MainHandPosition"]
+
+[node name="EquipArea" type="Area2D" parent="MainHandPosition"]
+
+[node name="EquipRange" type="CollisionShape2D" parent="MainHandPosition/EquipArea"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[connection signal="body_entered" from="MainHandPosition/EquipArea" to="." method="_on_EquipArea_body_entered"]
+[connection signal="body_exited" from="MainHandPosition/EquipArea" to="." method="_on_EquipArea_body_exited"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
