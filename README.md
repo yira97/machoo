@@ -8,5 +8,5 @@ rogue like 2d game
 
 ## control
 
-- move: 'W'/'A'/'S'/'D'
+- move: 'W','A','S','D'
 - attack: 'K'
