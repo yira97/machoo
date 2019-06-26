@@ -10,3 +10,7 @@ rogue like 2d game
 
 - move: 'W','A','S','D'
 - attack: 'J'
+
+## notice
+
+我知道有bug，但我不会再更新了。:D
