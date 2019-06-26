@@ -9,4 +9,4 @@ rogue like 2d game
 ## control
 
 - move: 'W','A','S','D'
-- attack: 'K'
+- attack: 'J'
