@@ -234,7 +234,7 @@ tracks/3/keys = {
 "values": [ 5.0, 7.0, 10.0, 7.0 ]
 }
 
-[node name="Masked_Ork" instance=ExtResource( 1 )]
+[node name="Masked_Ork" index="0" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 health = 30
 dexterity = 3

@@ -4,7 +4,7 @@ var battle_status:bool = false
 
 func trace():
 	move_direction = target.get_global_position() - puppet.get_global_position()
-	if abs(target.get_global_position().x - puppet.get_global_position().x) < 25: # if the distance is close enough, hold the x-axis, just move the y-axis.-
+	if abs(target.get_global_position().x - puppet.get_global_position().x) < 18: # if the distance is close enough, hold the x-axis, just move the y-axis.-
 		move_direction.x = 0
 		if abs(target.get_global_position().y - puppet.get_global_position().y) < 5:
 			move_direction.y = 0

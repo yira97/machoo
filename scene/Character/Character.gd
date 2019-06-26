@@ -24,8 +24,9 @@ func get_speed():
 	return dexterity * 10
 	
 func dead():
-	$AnimationPlayer.play("die")
 	dead_extend()
+	$AnimationPlayer.play("die")
+	
 
 func dead_extend():
 	pass

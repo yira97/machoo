@@ -24,9 +24,11 @@ func _on_Area2D_body_entered(body):
 	if target == null:
 		if target_nodes != null:
 			for n in target_nodes:
-				if get_node(n).is_a_parent_of(body) || get_node(n) == body:
-					#print("catch you")
-					target = body
+				var i_n = get_node(n)
+				if i_n:
+					if i_n.is_a_parent_of(body) || i_n == body:
+						#print("catch you")
+						target = body
 
 
 func _on_Area2D_body_exited(body):
