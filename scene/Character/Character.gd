@@ -9,6 +9,7 @@ export (int) var intelligence = 10
 export (int) var mens = 10
 export (int) var luck = 100
 export (bool) var alive_status = true
+export (Dictionary) var character_bag = {}
 
 var move_step:Vector2 = Vector2(0,0)
 var in_range_targets:Array = []
@@ -89,6 +90,8 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 		queue_free()
 		
 func on_collect_item(itemID):
+	var item_number:int = character_bag.get(itemID,0)
+	character_bag[itemID] = item_number + 1
 	print("collect something")
 
 
