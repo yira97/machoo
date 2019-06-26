@@ -2,6 +2,7 @@ extends Node2D
 
 var ork = preload("res://scene/Character/Masked_Ork.tscn")
 var mAI =  preload("res://scene/Tool/MaliciousAIController.tscn")
+var i_knight
 
 func gen_mAI():
 	var i_ork = ork.instance()
@@ -10,13 +11,9 @@ func gen_mAI():
 	i_ork.add_child(i_mAI)
 	return i_ork
 
-func _physics_process(delta):
-	if $Knight:
-		$MoneyTextLabel.text = String($Knight.character_bag.get(1,0))
-
 
 func _enter_tree():
-	pass
+	i_knight = get_node("Knight")
 	
 	
 func _on_Timer_timeout():

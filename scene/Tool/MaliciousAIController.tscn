@@ -5,7 +5,7 @@
 
 [sub_resource type="CircleShape2D" id=1]
 
-[node name="MaliciousAIController" instance=ExtResource( 1 )]
+[node name="MaliciousAIController" index="0" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
 [node name="AttackArea" type="Area2D" parent="." index="1"]
