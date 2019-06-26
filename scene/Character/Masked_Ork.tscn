@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://scene/Character/Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scene/Character/Masked_Ork.gd" type="Script" id=2]
@@ -10,6 +10,12 @@
 [ext_resource path="res://sprite/0x72_DungeonTileset_v1.1_individual_sprites/masked_orc_run_anim_f1.png" type="Texture" id=8]
 [ext_resource path="res://sprite/0x72_DungeonTileset_v1.1_individual_sprites/masked_orc_run_anim_f2.png" type="Texture" id=9]
 [ext_resource path="res://sprite/0x72_DungeonTileset_v1.1_individual_sprites/masked_orc_run_anim_f3.png" type="Texture" id=10]
+[ext_resource path="res://sprite/explosion/explosion1_gaitubao_41x41.png" type="Texture" id=11]
+[ext_resource path="res://sprite/explosion/explosion2_gaitubao_41x40.png" type="Texture" id=12]
+[ext_resource path="res://sprite/explosion/explosion3_gaitubao_41x41.png" type="Texture" id=13]
+[ext_resource path="res://sprite/explosion/explosion4_gaitubao_33x32.png" type="Texture" id=14]
+[ext_resource path="res://sprite/explosion/explosion5_gaitubao_42x41.png" type="Texture" id=15]
+[ext_resource path="res://sprite/0x72_DungeonTileset_v1.1_individual_sprites/weapon_knife.png" type="Texture" id=16]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -22,15 +28,33 @@ animations = [ {
 "loop": true,
 "name": "run",
 "speed": 5.0
+}, {
+"frames": [ ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ) ],
+"loop": true,
+"name": "die",
+"speed": 10.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 4.17551, 8.00234 )
 
-[sub_resource type="CircleShape2D" id=7]
+[sub_resource type="CircleShape2D" id=3]
 
-[sub_resource type="Animation" id=4]
-resource_name = "hit"
+[sub_resource type="SpriteFrames" id=4]
+animations = [ {
+"frames": [ ExtResource( 16 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 14.2857, 11.4286 )
+
+[sub_resource type="Animation" id=9]
+resource_name = "die"
+length = 0.2
+step = 0.01
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:animation")
 tracks/0/interp = 1
@@ -38,10 +62,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray(  ),
-"transitions": PoolRealArray(  ),
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [  ]
+"values": [ "die", "die" ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("AnimatedSprite:frame")
@@ -50,14 +74,66 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray(  ),
-"transitions": PoolRealArray(  ),
+"times": PoolRealArray( 0, 0.04, 0.08, 0.12, 0.16 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [  ]
+"values": [ 0, 1, 2, 3, 4 ]
 }
 
 [sub_resource type="Animation" id=5]
-resource_name = "idle"
+length = 0.15
+step = 0.03
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.09 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ "idle", "idle" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.09 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("MainHandPosition/EquipSprite:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.09 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 3 ), Vector2( 8, 3 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("MainHandPosition/EquipSprite:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.09 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 90.0, 90.0 ]
+}
+
+[sub_resource type="Animation" id=6]
+loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:animation")
 tracks/0/interp = 1
@@ -82,9 +158,33 @@ tracks/1/keys = {
 "update": 1,
 "values": [ 0, 1, 2, 3 ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("MainHandPosition/EquipSprite:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 2 ), Vector2( 0, 3 ), Vector2( 0, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("MainHandPosition/EquipSprite:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 10.0, 0.0, 0.0, 5.0 ]
+}
 
-[sub_resource type="Animation" id=6]
-resource_name = "run"
+[sub_resource type="Animation" id=7]
+loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:animation")
 tracks/0/interp = 1
@@ -109,6 +209,30 @@ tracks/1/keys = {
 "update": 1,
 "values": [ 0, 1, 2, 3 ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("MainHandPosition/EquipSprite:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, -1 ), Vector2( 0, 0 ), Vector2( 0, -1 ), Vector2( 0, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("MainHandPosition/EquipSprite:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 5.0, 7.0, 10.0, 7.0 ]
+}
 
 [node name="Masked_Ork" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
@@ -117,7 +241,7 @@ dexterity = 3
 
 [node name="AnimatedSprite" parent="." index="0"]
 frames = SubResource( 1 )
-animation = "run"
+animation = "die"
 
 [node name="CollisionRange" parent="." index="1"]
 position = Vector2( 0.824, 1 )
@@ -125,9 +249,27 @@ shape = SubResource( 2 )
 
 [node name="InteractRange" parent="InteractArea" index="0"]
 scale = Vector2( 2, 2 )
-shape = SubResource( 7 )
+shape = SubResource( 3 )
+
+[node name="MainHandPosition" parent="." index="3"]
+position = Vector2( 7, 1 )
+scale = Vector2( 0.7, 0.7 )
+
+[node name="CoolDownTimer" parent="MainHandPosition" index="0"]
+autostart = true
+
+[node name="EquipSprite" parent="MainHandPosition" index="1"]
+position = Vector2( 8, 3 )
+rotation = 1.5708
+frames = SubResource( 4 )
+animation = "idle"
+
+[node name="EquipRange" parent="MainHandPosition/EquipArea" index="0"]
+position = Vector2( 2, 0 )
+shape = SubResource( 8 )
 
 [node name="AnimationPlayer" parent="." index="4"]
-anims/hit = SubResource( 4 )
-anims/idle = SubResource( 5 )
-anims/run = SubResource( 6 )
+anims/die = SubResource( 9 )
+anims/hit = SubResource( 5 )
+anims/idle = SubResource( 6 )
+anims/run = SubResource( 7 )

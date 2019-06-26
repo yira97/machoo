@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scene/Tool/TraceAIController.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scene/Tool/MaliciousAIController.gd" type="Script" id=2]
+
+[sub_resource type="CircleShape2D" id=1]
+
+[node name="MaliciousAIController" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="AttackArea" type="Area2D" parent="." index="1"]
+
+[node name="AttackRange" type="CollisionShape2D" parent="AttackArea" index="0"]
+scale = Vector2( 2.5, 2.5 )
+shape = SubResource( 1 )
+[connection signal="body_entered" from="AttackArea" to="." method="_on_AttackArea_body_entered"]
+[connection signal="body_exited" from="AttackArea" to="." method="_on_AttackArea_body_exited"]
